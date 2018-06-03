@@ -171,9 +171,11 @@ public class InterfazUsuario {
 					break;
 				case 3:
 					if (userLog.getAgendaFavorita() != " ") {
-						System.out.println("Agenda [" + userLog.buscarAgendaPorNombre(userLog.getAgendaFavorita()).getNombre() + "]");
-						System.out.println("Contactos de [" + userLog.buscarAgendaPorNombre(userLog.getAgendaFavorita()).getNombre() + "]");
-						userLog.buscarAgendaPorNombre(userLog.getAgendaFavorita()).mostrarContactos();
+						Agenda agendaFav = userLog.buscarAgendaPorNombre(userLog.getAgendaFavorita());
+						System.out.println("Agenda [" + agendaFav.getNombre() + "]");
+						System.out.println("Categorias de [" + agendaFav.getNombre() + "]:" + agendaFav.mostrarCategorias());
+						System.out.println("Contactos de [" + agendaFav.getNombre() + "]");
+						agendaFav.mostrarContactos();
 					} else System.out.println("No hay agenda favorita");					
 					break;
 				}
@@ -215,7 +217,7 @@ public class InterfazUsuario {
 				this.menuCategorias(agendaEnc);
 				break;
 			}
-		} while (eleccionEditorAgenda != 3);
+		} while (eleccionEditorAgenda != 4);
 	}
 	public void menuCategorias (Agenda agendaEnc) {
 		int eleccionCategoria;
@@ -242,6 +244,6 @@ public class InterfazUsuario {
 				break;
 			}
 			
-		} while (eleccionCategoria != 3);
+		} while (eleccionCategoria != 2);
 	}
 }
