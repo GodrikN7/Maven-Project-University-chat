@@ -41,12 +41,28 @@ public class Agenda {
 		}
 	}
 
-	public void mostrarCategorias() {
-		
+	public String mostrarCategorias() {
+		String categorias;
+		if (this.listaCategoria.isEmpty()) {
+			categorias = "Sin categoria/s";
+		} else {
+			categorias = "[";
+			for (int i = 0; i < this.listaCategoria.size(); i++) {
+				categorias =  categorias + this.listaCategoria.get(i) + " ";
+			}
+			categorias = categorias + "]";
+		}
+		return categorias;		
 	}
-
-	public void asignarCategoria(ArrayList<String> listaCategoria) {
-		// !!! SE ESTABLECE EN USUARIO (ACEPTAMOS PODER CAMBIARLA?)
+	
+	public boolean borrarCategoria(String bCategoria) {
+		for (int i = 0; i < this.listaCategoria.size(); i++) {
+			if (bCategoria.equals(this.listaCategoria.get(i))){
+				this.listaCategoria.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	// GETTERS AND SETTERS

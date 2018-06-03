@@ -106,7 +106,7 @@ public class InterfazUsuario {
 		int eleccion2;
 		do {
 			System.out.println("---------- Menu Usuario [" + userLog.getAlias() + "] ----------");
-			System.out.println("[0] - Ver agendas");
+			System.out.println("[0] - Menu agendas");
 			System.out.println("[1] - Log in");
 			System.out.println("[2] - Listar usuarios");
 			System.out.println("[3] - DESCONECTARSE");
@@ -188,7 +188,8 @@ public class InterfazUsuario {
 			System.out.println("[0] - Cambiar nombre");
 			System.out.println("[1] - Marcar como favorita - Agenda favorita actual: [" + userLog.getAgendaFavorita() + "]");
 			System.out.println("[2] - Añadir contacto"); //buscarlas por nombre
-			System.out.println("[3] - Salir del editor");
+			System.out.println("[3] - Editar categorias - Categorias actuales: "+ agendaEnc.mostrarCategorias() );
+			System.out.println("[4] - Salir del editor");
 			eleccionEditorAgenda = sc.nextInt();
 			switch (eleccionEditorAgenda) {
 			case 0:
@@ -210,7 +211,37 @@ public class InterfazUsuario {
 					agendaEnc.getContactos().add(nuevoContacto);
 				} else System.out.println("Usuario no encontrado");				
 				break;
+			case 3:
+				this.menuCategorias(agendaEnc);
+				break;
 			}
 		} while (eleccionEditorAgenda != 3);
+	}
+	public void menuCategorias (Agenda agendaEnc) {
+		int eleccionCategoria;
+		do {
+			System.out.println("---- Editor de categorias: [" + agendaEnc.getNombre() + "] ----");
+			System.out.println("[0] - Añadir Categoria");
+			System.out.println("[1] - Borrar categoria");
+			System.out.println("[2] - Salir de editor de categorias");
+			eleccionCategoria = sc.nextInt();
+			switch (eleccionCategoria) {
+			case 0:
+				String nCategoria;
+				System.out.println("Nombre de la nueva categoria: ");
+				nCategoria = sc.next();
+				agendaEnc.getCategoria().add(nCategoria);
+				break;
+			case 1:
+				String bCategoria;
+				System.out.println("Nombre de categoria a eliminar: ");
+				bCategoria = sc.next();
+				if (agendaEnc.borrarCategoria(bCategoria)) {
+					System.out.println("Categoria [" + bCategoria + "] eliminada exitosamente.");
+				} else System.out.println("ERROR - Categoria [" + bCategoria + "] no encontrada");
+				break;
+			}
+			
+		} while (eleccionCategoria != 3);
 	}
 }
