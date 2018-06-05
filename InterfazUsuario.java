@@ -36,9 +36,9 @@ public class InterfazUsuario {
 
 		} while (eleccion != 4);
 	}
-	
-	// 
-	public void logear() { 
+
+	//
+	public void logear() {
 		int intentos = 0;
 		Usuario usuarioEnc;
 		String correo = "";
@@ -46,7 +46,7 @@ public class InterfazUsuario {
 
 		System.out.print("correo:");
 		correo = sc.next();
-		usuarioEnc = bd.buscarUsuarioPorCorreo(correo); //busca users en la bd mediante el correo
+		usuarioEnc = bd.buscarUsuarioPorCorreo(correo); // busca users en la bd mediante el correo
 		if (usuarioEnc == null) {
 			System.out.println("CORREO '" + correo + "' NO ENCONTRADO");
 		} else {
@@ -123,74 +123,76 @@ public class InterfazUsuario {
 	}
 
 	public void menuAgendas(Usuario userLog) {
-		if (userLog.getAgendasUsuario().isEmpty()) {
-			System.out.println("No se han encontrado agendas");
-		} else {
-			int eleccionAgendas;
-			String nAgenda;
-			do {
-				System.out.println("------ Menu Agendas [" + userLog.getAlias() + "] ------");
-				System.out.println("[0] - Mostrar Agendas");
-				System.out.println("[1] - Crear Agenda");
-				System.out.println("[2] - Editar Agendas"); //buscarlas por nombre
-				System.out.println("[3] - Ver agenda favorita"); //buscar usuario por nombre
-				System.out.println("[4] - DESCONECTARSE");
-				eleccionAgendas = sc.nextInt();
-				switch (eleccionAgendas) {
-				case 0:
-					for (int i = 0; i < userLog.getAgendasUsuario().size(); i++) {
-						System.out.println("Agenda "+ i + ": " + userLog.getAgendasUsuario().get(i).getNombre());
-						if (userLog.getAgendasUsuario().get(i).getContactos().size() > 0) {
-							System.out.println(
-									"------ Contactos de [" + userLog.getAgendasUsuario().get(i).getNombre() + "] ------");
-							userLog.getAgendasUsuario().get(i).mostrarContactos();
-						}
+
+		int eleccionAgendas;
+		String nAgenda;
+		do {
+			System.out.println("------ Menu Agendas [" + userLog.getAlias() + "] ------");
+			System.out.println("[0] - Mostrar Agendas");
+			System.out.println("[1] - Crear Agenda");
+			System.out.println("[2] - Editar Agendas"); // buscarlas por nombre
+			System.out.println("[3] - Ver agenda favorita"); // buscar usuario por nombre
+			System.out.println("[4] - DESCONECTARSE");
+			eleccionAgendas = sc.nextInt();
+			switch (eleccionAgendas) {
+			case 0:
+				for (int i = 0; i < userLog.getAgendasUsuario().size(); i++) {
+					System.out.println("Agenda " + i + ": " + userLog.getAgendasUsuario().get(i).getNombre());
+					if (userLog.getAgendasUsuario().get(i).getContactos().size() > 0) {
+						System.out.println(
+								"------ Contactos de [" + userLog.getAgendasUsuario().get(i).getNombre() + "] ------");
+						userLog.getAgendasUsuario().get(i).mostrarContactos();
 					}
-					break;
-				case 1:
-					System.out.println("Introduce el nombre de la agenda: ");
-					nAgenda = sc.next();
-					if (userLog.buscarAgendaPorNombre(nAgenda) != null) {
-						System.out.println("Agenda ya existente");
-					} else userLog.getAgendasUsuario().add(new Agenda(nAgenda));					
-					break;
-				case 2:
-					Agenda agendaEnc;
-					for (int i = 0; i < userLog.getAgendasUsuario().size(); i++) {
-						System.out.println(userLog.getAgendasUsuario().get(i).getNombre());
-					}
-					System.out.println("Nombre de la agenda a editar: ");
-					nAgenda = sc.next();
-					agendaEnc = userLog.buscarAgendaPorNombre(nAgenda);
-					if (agendaEnc == null) {
-						System.out.println("Agenda no encontrada");
-					} else {
-						System.out.println("Agenda encontrada");
-						this.menuEditorAgenda(agendaEnc, userLog);
-					}
-					break;
-				case 3:
-					if (userLog.getAgendaFavorita() != " ") {
-						Agenda agendaFav = userLog.buscarAgendaPorNombre(userLog.getAgendaFavorita());
-						System.out.println("Agenda [" + agendaFav.getNombre() + "]");
-						System.out.println("Categorias de [" + agendaFav.getNombre() + "]:" + agendaFav.mostrarCategorias());
-						System.out.println("Contactos de [" + agendaFav.getNombre() + "]");
-						agendaFav.mostrarContactos();
-					} else System.out.println("No hay agenda favorita");					
-					break;
 				}
-			} while (eleccionAgendas != 4);
-		}
+				break;
+			case 1:
+				System.out.println("Introduce el nombre de la agenda: ");
+				nAgenda = sc.next();
+				if (userLog.buscarAgendaPorNombre(nAgenda) != null) {
+					System.out.println("Agenda ya existente");
+				} else
+					userLog.getAgendasUsuario().add(new Agenda(nAgenda));
+				break;
+			case 2:
+				Agenda agendaEnc;
+				for (int i = 0; i < userLog.getAgendasUsuario().size(); i++) {
+					System.out.println(userLog.getAgendasUsuario().get(i).getNombre());
+				}
+				System.out.println("Nombre de la agenda a editar: ");
+				nAgenda = sc.next();
+				agendaEnc = userLog.buscarAgendaPorNombre(nAgenda);
+				if (agendaEnc == null) {
+					System.out.println("Agenda no encontrada");
+				} else {
+					System.out.println("Agenda encontrada");
+					this.menuEditorAgenda(agendaEnc, userLog);
+				}
+				break;
+			case 3:
+				if (userLog.getAgendaFavorita() != " ") {
+					Agenda agendaFav = userLog.buscarAgendaPorNombre(userLog.getAgendaFavorita());
+					System.out.println("Agenda [" + agendaFav.getNombre() + "]");
+					System.out
+							.println("Categorias de [" + agendaFav.getNombre() + "]:" + agendaFav.mostrarCategorias());
+					System.out.println("Contactos de [" + agendaFav.getNombre() + "]");
+					agendaFav.mostrarContactos();
+				} else
+					System.out.println("No hay agenda favorita");
+				break;
+			}
+		} while (eleccionAgendas != 4);
 
 	}
-	public void menuEditorAgenda (Agenda agendaEnc, Usuario userLog) {
+
+	public void menuEditorAgenda(Agenda agendaEnc, Usuario userLog) {
 		int eleccionEditorAgenda;
 		do {
 			System.out.println("------ Editor de agenda: [" + agendaEnc.getNombre() + "] ------");
 			System.out.println("[0] - Cambiar nombre");
-			System.out.println("[1] - Marcar como favorita - Agenda favorita actual: [" + userLog.getAgendaFavorita() + "]");
-			System.out.println("[2] - Añadir contacto"); //buscarlas por nombre
-			System.out.println("[3] - Editar categorias - Categorias actuales: "+ agendaEnc.mostrarCategorias() );
+			System.out.println(
+					"[1] - Marcar como favorita - Agenda favorita actual: [" + userLog.getAgendaFavorita() + "]");
+			System.out.println("[2] - Añadir contacto"); // buscarlas por nombre
+			System.out.println("[3] - Editar categorias - Categorias actuales: " + agendaEnc.mostrarCategorias());
 			System.out.println("[4] - Salir del editor");
 			eleccionEditorAgenda = sc.nextInt();
 			switch (eleccionEditorAgenda) {
@@ -201,7 +203,7 @@ public class InterfazUsuario {
 				agendaEnc.setNombre(nombreAgenda);
 				break;
 			case 1:
-				userLog.setAgendaFavorita(agendaEnc.getNombre());				
+				userLog.setAgendaFavorita(agendaEnc.getNombre());
 				break;
 			case 2:
 				String correoContacto;
@@ -211,7 +213,8 @@ public class InterfazUsuario {
 				nuevoContacto = bd.buscarUsuarioPorCorreo(correoContacto);
 				if (nuevoContacto != null) {
 					agendaEnc.getContactos().add(nuevoContacto);
-				} else System.out.println("Usuario no encontrado");				
+				} else
+					System.out.println("Usuario no encontrado");
 				break;
 			case 3:
 				this.menuCategorias(agendaEnc);
@@ -219,7 +222,8 @@ public class InterfazUsuario {
 			}
 		} while (eleccionEditorAgenda != 4);
 	}
-	public void menuCategorias (Agenda agendaEnc) {
+
+	public void menuCategorias(Agenda agendaEnc) {
 		int eleccionCategoria;
 		do {
 			System.out.println("---- Editor de categorias: [" + agendaEnc.getNombre() + "] ----");
@@ -240,10 +244,11 @@ public class InterfazUsuario {
 				bCategoria = sc.next();
 				if (agendaEnc.borrarCategoria(bCategoria)) {
 					System.out.println("Categoria [" + bCategoria + "] eliminada exitosamente.");
-				} else System.out.println("ERROR - Categoria [" + bCategoria + "] no encontrada");
+				} else
+					System.out.println("ERROR - Categoria [" + bCategoria + "] no encontrada");
 				break;
 			}
-			
+
 		} while (eleccionCategoria != 2);
 	}
 }

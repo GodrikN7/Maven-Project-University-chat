@@ -43,6 +43,7 @@ public class Usuario {
 		this.perfilUsuario 		= new Perfil(); // crea automaticamente el perfil
 		this.mensajesUsuario 	= new ArrayList<Mensaje> (); // Mejor usar un array list que un array clasico
 		this.agendasUsuario  	= new ArrayList<Agenda> ();
+		this.agendasUsuario.add(new Agenda("default"));
 		
 	}
 	
@@ -50,7 +51,6 @@ public class Usuario {
 	public boolean verificarLogin (String correo, String pass) {
 		if (correo.equals(this.correoUPM)) {
 			if (pass.equals(this.password)){
-				System.out.println("login correcto");
 				return true;
 			} else {
 				System.out.println("password incorrecta");
