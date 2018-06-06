@@ -1,40 +1,44 @@
 package es.upm.fis2018.gm11_6.core;
 
-public class Mensaje {
-	private String idMensaje;
-	private String contenido;
-	private Usuario remitente;
-	
-	public Mensaje (String idM, String cont, Usuario remitenteC) {
-		this.idMensaje = idM;
-		this.contenido = cont;
-		this.remitente = remitenteC;		
-	}
+import java.util.Date;
 
+public class Mensaje {
+	private String idMensaje;//no se usa
+	private String contenido;
+	private Usuario emisor;
+	private Date date = new Date ();
+	
+	public Mensaje (String cont, Usuario emisorC) {
+		this.idMensaje = "0";
+		this.contenido = cont;
+		this.emisor = emisorC;		
+	}
 	
 	
-//	
-//	//GETTERS AND SETTERS
-//	public String getIdMensaje() {
-//		return idMensaje;
-//	}
-//	public void setIdMensaje(String idMensaje) {
-//		this.idMensaje = idMensaje;
-//	}
-//	public String getContenido() {
-//		return contenido;
-//	}
-//	public void setContenido(String contenido) {
-//		this.contenido = contenido;
-//	}
-//	public Usuario getRemitente() {
-//		return remitente;
-//	}
-//	public void setRemitente(Usuario remitente) {
-//		this.remitente = remitente;
-//	}	
-//	public void guardarEnDataBase(String idMensaje, String contenido,Usuario remitente ){
-//		List<String> entrada = Arrays.asList(idMensaje, contenido,remitente.toString);
-//		Path file = Paths.get("the-file-name.txt");
-//		Files.write(file, lines, Charset.forName("UTF-8"));
+
+    public Date getCreationDate ()
+    {
+        return date;
+    }
+	
+	
+	//GETTERS AND SETTERS
+	public String getIdMensaje() {
+		return idMensaje;
+	}
+	public void setIdMensaje(String idMensaje) {
+		this.idMensaje = idMensaje;
+	}
+	public String getContenido() {
+		return contenido;
+	}
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
+	}
+	public Usuario getEmisor() {
+		return emisor;
+	}
+	public void setEmisor(Usuario emisor) {
+		this.emisor = emisor;
+	}
 }

@@ -7,6 +7,8 @@ public class BaseDatos{
     private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
     private ArrayList<String> correosUPM = new ArrayList<String>();
     private ArrayList<String> correosUPMLibres = new ArrayList<String>();
+    private ArrayList<Conversacion> conversaciones = new ArrayList<Conversacion>();
+    private int numeroConversaciones = 0;
     int numeroUsuarios = 0;
     
 
@@ -86,9 +88,47 @@ public class BaseDatos{
     	}
     	System.out.print("]");
     	System.out.println();
+    	System.out.println("Conversaciones registradas: ");
+    	for (int i = 0 ; i < this.conversaciones.size(); i++) {
+    		System.out.println("[" + this.conversaciones.get(i).getIdConversacion() + "]: Emisor(" + this.conversaciones.get(i).getEmisor().getCorreoUPM() + ") - Receptor(" + this.conversaciones.get(i).getReceptor().getCorreoUPM() + ")");
+    	}
+    	System.out.println();
     }
     
-    //GETTERS AND SETTERS
+    //CONVERSACIONES
+    
+    
+    public void anyadirConversacion(Conversacion conv) {
+    	this.conversaciones.add(conv);
+    	this.numeroConversaciones++;
+    	conv.getEmisor().getConversacionesPart().add(conv);
+		conv.getReceptor().getConversacionesPart().add(conv);
+    }
+    
+    //busca una conversacion por el id
+    public Conversacion encontrarConversacion(int id) {
+    	for (int i = 0; i < this.conversaciones.size(); i++) {
+    		if (id == this.conversaciones.get(i).getIdConversacion()) {
+    			return this.conversaciones.get(i);
+    		}
+    	}
+    	return null;
+    }
+    
+    public int getNumeroConversaciones() {
+		return numeroConversaciones;
+	}
+	public void setNumeroConversaciones(int numeroConversaciones) {
+		this.numeroConversaciones = numeroConversaciones;
+	}
+	public ArrayList<Conversacion> getConversaciones() {
+		return conversaciones;
+	}
+	public void setConversaciones(ArrayList<Conversacion> conversaciones) {
+		this.conversaciones = conversaciones;
+	} 
+
+	//GETTERS AND SETTERS
     public ArrayList<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -114,5 +154,7 @@ public class BaseDatos{
 	}
 	public void setCorreosUPMLibres(ArrayList<String> correosUPMLibres) {
 		this.correosUPMLibres = correosUPMLibres;
-	}    
+	}
+	
+	
 }

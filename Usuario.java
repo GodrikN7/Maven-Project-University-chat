@@ -31,6 +31,7 @@ public class Usuario {
 	private Perfil perfilUsuario;
 	private ArrayList<Mensaje> mensajesUsuario;
 	private ArrayList<Agenda> agendasUsuario;
+	private ArrayList<Conversacion> conversacionesPart; //conversaciones en las que participa
 	
 	
 	public Usuario(String nombre, String apellidos, String alias, String correo, String pass, int id) {
@@ -44,6 +45,7 @@ public class Usuario {
 		this.mensajesUsuario 	= new ArrayList<Mensaje> (); // Mejor usar un array list que un array clasico
 		this.agendasUsuario  	= new ArrayList<Agenda> ();
 		this.agendasUsuario.add(new Agenda("default"));
+		this.conversacionesPart = new ArrayList<Conversacion>();
 		
 	}
 	
@@ -72,18 +74,6 @@ public class Usuario {
 		return null;
 	}
 	
-	/*
-	
-	-- PUEDEN NO SER NECESARIOS -- 
-	
-	public void introducirDatos() {}
-	public void introducirNombre(String nombre) {}
-	public void introducirApellidos(String apellidos) {}
-	public void introducirCorreo(String correoUPM) {}
-	public void introducirAlias(String alias) {}
-	public void introducirPassword(String password) {}
-	*/
-	
 	public void anyadirAgenda (Agenda agenda) {
 		this.agendasUsuario.add(agenda);
 	}
@@ -100,16 +90,26 @@ public class Usuario {
 			     + getCorreoUPM();
 	}
 
-	public void eliminarDatos() {
-
+	//CONVERSACIONES
+	public void anyadirConversacion (Conversacion conv) {
+		this.conversacionesPart.add(conv);
 	}
-	//public void anyadirAgenda (String categoria) {
-	//	this.agendasUsuario.add(new Agenda(categoria)); // terminar de rellenar lo que se introduce a la agenda
-	//}
-	
-	
-	
-	
+	// muestra las conversaciones que el usuario tiene iniciadas
+	public void mostrarConversaciones() {
+		System.out.println("Conversaciones activas");		
+		for (int i = 0; i < this.conversacionesPart.size(); i++) {
+			if (this.conversacionesPart.get(i).getReceptor().equals(this)) {
+				System.out.println("[" + this.conversacionesPart.get(i).getIdConversacion() + "]: Conversacion con '" + this.conversacionesPart.get(i).getEmisor().getCorreoUPM() + "'");
+			}
+			else System.out.println("[" + this.conversacionesPart.get(i).getIdConversacion() + "]: Conversacion con '" + this.conversacionesPart.get(i).getReceptor().getCorreoUPM() + "'");
+		}		
+	}
+	//comprueba que pertenece a la conversacion
+	public boolean entrarConversacion(Conversacion conv) {
+		if (conv.getEmisor().equals(this) || conv.getReceptor().equals(this)) {
+			return true;
+		} else return false;
+	}
 	
 	// SETTERS AND GETTERS
 	public String getNombre() {
@@ -179,5 +179,12 @@ public class Usuario {
 	public ArrayList<Agenda> getAgendasUsuario() {
 		return agendasUsuario;
 	}
+
+	public ArrayList<Conversacion> getConversacionesPart() {
+		return conversacionesPart;
+	}
+	public void setConversacionesPart(ArrayList<Conversacion> conversacionesPart) {
+		this.conversacionesPart = conversacionesPart;
+	}	
 	
 }

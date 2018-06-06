@@ -107,7 +107,7 @@ public class InterfazUsuario {
 		do {
 			System.out.println("---------- Menu Usuario [" + userLog.getAlias() + "] ----------");
 			System.out.println("[0] - Menu agendas");
-			System.out.println("[1] - Log in");
+			System.out.println("[1] - Menu conversacion");
 			System.out.println("[2] - Listar usuarios");
 			System.out.println("[3] - DESCONECTARSE");
 			eleccion2 = sc.nextInt();
@@ -116,12 +116,13 @@ public class InterfazUsuario {
 				this.menuAgendas(userLog);
 				break;
 			case 1:
+				this.menuConversacion(userLog);
 				break;
 			}
 		} while (eleccion2 != 3);
 
 	}
-
+	//MENU AGENDAS
 	public void menuAgendas(Usuario userLog) {
 
 		int eleccionAgendas;
@@ -250,5 +251,85 @@ public class InterfazUsuario {
 			}
 
 		} while (eleccionCategoria != 2);
+	}
+	//CONVERSACIONES
+	public void menuConversacion (Usuario userLog) {
+		int eleccionMenuConversacion;
+		do {
+			System.out.println("---- Menu Conversacion: [" + userLog.getAlias() + "] ----");
+			System.out.println("[0] - Empezar conversacion");
+			System.out.println("[1] - Ver conversaciones iniciadas");
+			System.out.println("[2] - Borrar conversacion -- WIP");
+			System.out.println("[3] - Entrar en conversacion");
+			System.out.println("[4] - Salir de menu conversacion");
+			eleccionMenuConversacion = sc.nextInt();
+			switch (eleccionMenuConversacion) {
+			case 0:
+				String correoReceptor;
+				Usuario contactoRec;
+				Conversacion nuevaConversacion;
+				System.out.println("Escribe el correo del contacto con el que quieres conversar: ");
+				correoReceptor = sc.next();
+				contactoRec = bd.buscarUsuarioPorCorreo(correoReceptor);
+				if (contactoRec != null) {
+					nuevaConversacion = new Conversacion(bd.getNumeroConversaciones(), userLog, contactoRec);
+					bd.anyadirConversacion(nuevaConversacion);
+					System.out.println("Conversacion iniciada con '" + contactoRec.getCorreoUPM() + "'");
+				} else
+					System.out.println("Usuario no encontrado");
+				break;
+			case 1:
+				if (userLog.getConversacionesPart().size() > 0) {
+					userLog.mostrarConversaciones();
+				} else System.out.println("No tienes conversaciones activas");				
+				break;
+			case 2:
+//				if (userLog.getConversacionesPart().size() > 0) {
+//					int iBorrarC;
+//					userLog.mostrarConversaciones();
+//					System.out.println("Conversacion a borrar: ");
+//					iBorrarC = sc.nextInt();
+//				} else System.out.println("No tienes conversaciones activas");				
+				break;
+			case 3:
+				if (userLog.getConversacionesPart().size() > 0) {
+					int entrarId;
+					Conversacion conversacionEnc;
+					userLog.mostrarConversaciones();
+					System.out.println("Id de conversacion a entrar: ");
+					entrarId = sc.nextInt();
+					conversacionEnc = bd.encontrarConversacion(entrarId);
+					if (conversacionEnc != null) {
+						if (userLog.entrarConversacion(bd.getConversaciones().get(entrarId))) {
+							this.conversacionEncontrada(userLog, conversacionEnc);
+						} else System.out.println("Esa conversacion asociada a ese id no te pertenece.");
+					} else System.out.println("Conversacion no encontrada");
+					
+				} else System.out.println("No tienes conversaciones activas");
+				break;
+			}
+
+		} while (eleccionMenuConversacion != 4);		
+	}
+	public void conversacionEncontrada (Usuario userLog, Conversacion conversacionEnc) {
+		int eleccionConvEnc;
+		do {
+			System.out.println("---- Conversacion: [" + conversacionEnc.getEmisor().getCorreoUPM() + " - " + conversacionEnc.getReceptor().getCorreoUPM() +  "] ----");
+			System.out.println("[0] - Mostrar Mensajes");
+			System.out.println("[1] - Borrar mensaje -- WIP");
+			System.out.println("[2] - Salir de conversacion");
+			eleccionConvEnc = sc.nextInt();
+			switch (eleccionConvEnc) {
+			case 0:
+				if (!conversacionEnc.getListaMensajes().isEmpty()) {
+					conversacionEnc.mostrarMensajes();
+				} else System.out.println("No hay mensajes en esta conversacion");
+				break;
+			case 1:
+				
+				break;
+			}
+
+		} while (eleccionConvEnc != 2);
 	}
 }

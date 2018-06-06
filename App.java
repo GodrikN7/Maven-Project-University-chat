@@ -9,8 +9,8 @@ public class App
     public static void main( String[] args )
     {
     	//USUARIOS PRUEBA
-    	Usuario u0 = new Usuario("Jaime","apellido","Jaimito","jaime@upm.es","pass0",0);
-    	Usuario u1 = new Usuario("Raul","apellido","Rulo","raul@upm.es","pass1",1);
+    	Usuario u0 = new Usuario("Jaime","apellido","Jaimito","jaime@upm.es","1234",0);
+    	Usuario u1 = new Usuario("Raul","apellido","Rulo","raul@upm.es","1234",1);
     	Usuario u2 = new Usuario("Rick","Sanchez","Morty","rick@upm.es","1234",2);
     	
     	//AGENDAS USUARIOS PRUEBA
@@ -18,6 +18,10 @@ public class App
     	Agenda a1 = new Agenda("agenda1");
     	Agenda a2 = new Agenda("agenda2");
     	
+    	//CONVERSACIONES DE PRUEBA
+    	Conversacion c0 = new Conversacion(0 ,u0, u1);
+    	Conversacion c1 = new Conversacion(1 ,u0, u2);
+    	Conversacion c2 = new Conversacion(2 ,u2, u1);    	
     	
     	//VARIABLES
     	BaseDatos bd = new BaseDatos();
@@ -41,6 +45,10 @@ public class App
         bd.getCorreosUPMLibres().add("correolibre2@upm.es");
         bd.getCorreosUPMLibres().add("correolibre3@upm.es");
         
+        //RELLENO DE CONVERSACIONES
+        bd.anyadirConversacion(c0);
+        bd.anyadirConversacion(c1);
+        bd.anyadirConversacion(c2);        
              
         
         InterfazUsuario menu = new InterfazUsuario(bd);
