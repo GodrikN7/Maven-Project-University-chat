@@ -284,12 +284,21 @@ public class InterfazUsuario {
 				} else System.out.println("No tienes conversaciones activas");				
 				break;
 			case 2:
-//				if (userLog.getConversacionesPart().size() > 0) {
-//					int iBorrarC;
-//					userLog.mostrarConversaciones();
-//					System.out.println("Conversacion a borrar: ");
-//					iBorrarC = sc.nextInt();
-//				} else System.out.println("No tienes conversaciones activas");				
+				if (userLog.getConversacionesPart().size() > 0) {
+					int iBorrarC;
+					Conversacion conversacionBorrar;
+					userLog.mostrarConversaciones();
+					System.out.println("Conversacion a borrar: ");
+					iBorrarC = sc.nextInt();
+					conversacionBorrar = bd.encontrarConversacion(iBorrarC);					
+					if (conversacionBorrar != null) {
+						if (conversacionBorrar.getEmisor().equals(userLog) || conversacionBorrar.getReceptor().equals(userLog)) {
+							if(bd.borrarConversacion(conversacionBorrar, conversacionBorrar.getEmisor(), conversacionBorrar.getReceptor() )) {
+								System.out.println("Conversacion borrada");
+							} else System.out.println("No se ha podido borrar la conversacion");
+						}						
+					} else System.out.println("No existe una conversacion con ese id");
+				} else System.out.println("No tienes conversaciones activas");				
 				break;
 			case 3:
 				if (userLog.getConversacionesPart().size() > 0) {
