@@ -33,7 +33,7 @@ public class Conversacion {
 	public void mostrarMensajes() {
 		System.out.println("-----" + this.receptor.getCorreoUPM() + " - " + this.emisor.getCorreoUPM());
 		for (int i = 0; i < this.listaMensajes.size(); i++) {
-			System.out.println("[" + i + "]" + this.listaMensajes.get(i).getEmisor().getNombre() + "(" + this.listaMensajes.get(i).getCreationDate().toString() + "): " + "'" + this.listaMensajes.get(i).getContenido() + "'" );
+			System.out.println("[" + i + "]" + "(" + this.listaMensajes.get(i).getCreationDate().toString() + ") " + this.listaMensajes.get(i).getEmisor().getNombre().toUpperCase() + ": '" + this.listaMensajes.get(i).getContenido() + "'" );
 		}
 		System.out.print("---------- FIN DE LA CONVERSACION ----------");
 	}

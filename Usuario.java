@@ -27,7 +27,7 @@ public class Usuario {
 	private String password;
 	private String agendaFavorita = " ";;	
 	private int idUsuario;	
-	private Date fechaRegistro;
+	private Date date = new Date ();
 	private Perfil perfilUsuario;
 	private ArrayList<Mensaje> mensajesUsuario;
 	private ArrayList<Agenda> agendasUsuario;
@@ -111,6 +111,10 @@ public class Usuario {
 		} else return false;
 	}
 	
+	public Date getCreationDate ()
+    {
+        return date;
+    }
 	// SETTERS AND GETTERS
 	public String getNombre() {
 		return nombre;
@@ -153,12 +157,6 @@ public class Usuario {
 	}
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-	public Date getFechaRegistro() {
-		return fechaRegistro;
-	}
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
 	}
 	public ArrayList<Mensaje> getMensajesUsuario() {
 		return mensajesUsuario;

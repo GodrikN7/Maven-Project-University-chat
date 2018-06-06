@@ -21,7 +21,14 @@ public class App
     	//CONVERSACIONES DE PRUEBA
     	Conversacion c0 = new Conversacion(0 ,u0, u1);
     	Conversacion c1 = new Conversacion(1 ,u0, u2);
-    	Conversacion c2 = new Conversacion(2 ,u2, u1);    	
+    	Conversacion c2 = new Conversacion(2 ,u2, u1);   
+    	
+    	//RELLENO DE MENSAJES EN CONVERSACIONES
+    	c2.anyadirMensaje("Que pasaaaa ruloooo", u2);
+    	c2.anyadirMensaje("Qué nota sacaste en FIS?", u2);
+    	c2.anyadirMensaje("Bueno...", u1);
+    	c2.anyadirMensaje("He sacado un 5 raspao", u1);
+    	c2.anyadirMensaje("QUE HAS APROBADO COLEGUIIII!", u2);
     	
     	//VARIABLES
     	BaseDatos bd = new BaseDatos();
@@ -48,7 +55,10 @@ public class App
         //RELLENO DE CONVERSACIONES
         bd.anyadirConversacion(c0);
         bd.anyadirConversacion(c1);
-        bd.anyadirConversacion(c2);        
+        bd.anyadirConversacion(c2); 
+        
+        
+        
              
         
         InterfazUsuario menu = new InterfazUsuario(bd);

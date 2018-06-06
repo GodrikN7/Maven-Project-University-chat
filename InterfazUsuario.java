@@ -315,21 +315,28 @@ public class InterfazUsuario {
 		int eleccionConvEnc;
 		do {
 			System.out.println("---- Conversacion: [" + conversacionEnc.getEmisor().getCorreoUPM() + " - " + conversacionEnc.getReceptor().getCorreoUPM() +  "] ----");
-			System.out.println("[0] - Mostrar Mensajes");
-			System.out.println("[1] - Borrar mensaje -- WIP");
-			System.out.println("[2] - Salir de conversacion");
+			System.out.println("[1] - Mostrar Mensajes");
+			System.out.println("[2] - Enviar mensaje");
+			System.out.println("[3] - Borrar mensaje -- WIP");
+			System.out.println("[0] - Salir de conversacion");
 			eleccionConvEnc = sc.nextInt();
 			switch (eleccionConvEnc) {
-			case 0:
+			case 1:
 				if (!conversacionEnc.getListaMensajes().isEmpty()) {
 					conversacionEnc.mostrarMensajes();
+					System.out.println();
 				} else System.out.println("No hay mensajes en esta conversacion");
 				break;
-			case 1:
-				
+			case 2:
+				String msg;
+				System.out.println("Mensaje: ");
+				msg = sc.next();
+				conversacionEnc.anyadirMensaje(msg, userLog);
+				break;
+			case 3:
 				break;
 			}
 
-		} while (eleccionConvEnc != 2);
+		} while (eleccionConvEnc != 0);
 	}
 }
