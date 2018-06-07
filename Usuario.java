@@ -99,9 +99,9 @@ public class Usuario {
 		System.out.println("Conversaciones activas");		
 		for (int i = 0; i < this.conversacionesPart.size(); i++) {
 			if (this.conversacionesPart.get(i).getReceptor().equals(this)) {
-				System.out.println("[" + this.conversacionesPart.get(i).getIdConversacion() + "]: Conversacion con '" + this.conversacionesPart.get(i).getEmisor().getCorreoUPM() + "'");
+				System.out.println("[" + this.conversacionesPart.get(i).getIdConversacion() + "]: Conversacion con '" + this.conversacionesPart.get(i).getEmisor().getCorreoUPM() + "' --Mensajes: " + this.conversacionesPart.get(i).getListaMensajes().size());
 			}
-			else System.out.println("[" + this.conversacionesPart.get(i).getIdConversacion() + "]: Conversacion con '" + this.conversacionesPart.get(i).getReceptor().getCorreoUPM() + "'");
+			else System.out.println("[" + this.conversacionesPart.get(i).getIdConversacion() + "]: Conversacion con '" + this.conversacionesPart.get(i).getReceptor().getCorreoUPM() + "' --Mensajes: " + this.conversacionesPart.get(i).getListaMensajes().size());
 		}		
 	}
 	//comprueba que pertenece a la conversacion

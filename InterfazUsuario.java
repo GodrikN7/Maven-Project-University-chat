@@ -20,6 +20,7 @@ public class InterfazUsuario {
 			System.out.println("[3] - Listar BD");
 			System.out.println("[4] - SALIR");
 			eleccion = sc.nextInt();
+			sc.nextLine();
 			switch (eleccion) {
 			case 0:
 				this.registrarUser();
@@ -46,6 +47,7 @@ public class InterfazUsuario {
 
 		System.out.print("correo:");
 		correo = sc.next();
+		sc.nextLine();
 		usuarioEnc = bd.buscarUsuarioPorCorreo(correo); // busca users en la bd mediante el correo
 		if (usuarioEnc == null) {
 			System.out.println("CORREO '" + correo + "' NO ENCONTRADO");
@@ -54,6 +56,7 @@ public class InterfazUsuario {
 				System.out.println();
 				System.out.print("password: ");
 				pass = sc.next();
+				sc.nextLine();
 				System.out.println();
 				intentos++;
 			} while (!usuarioEnc.verificarLogin(correo, pass) && intentos < 3);
@@ -77,18 +80,23 @@ public class InterfazUsuario {
 		String pass;
 		System.out.print("nombre: ");
 		nombre = sc.next();
+		sc.nextLine();
 		System.out.println();
 		System.out.print("apellido: ");
-		apellidos = sc.next();
+		apellidos = sc.nextLine();
+		
 		System.out.println();
 		System.out.print("alias: ");
 		alias = sc.next();
+		sc.nextLine();
 		System.out.println();
 		System.out.print("correo: ");
 		correo = sc.next();
+		sc.nextLine();
 		System.out.println();
 		System.out.print("pass: ");
 		pass = sc.next();
+		sc.nextLine();
 		System.out.println();
 		bd.registrarUsuario(nombre, apellidos, alias, correo, pass);
 	}
@@ -111,6 +119,7 @@ public class InterfazUsuario {
 			System.out.println("[2] - Listar usuarios");
 			System.out.println("[3] - DESCONECTARSE");
 			eleccion2 = sc.nextInt();
+			sc.nextLine();
 			switch (eleccion2) {
 			case 0:
 				this.menuAgendas(userLog);
@@ -135,6 +144,7 @@ public class InterfazUsuario {
 			System.out.println("[3] - Ver agenda favorita"); // buscar usuario por nombre
 			System.out.println("[4] - DESCONECTARSE");
 			eleccionAgendas = sc.nextInt();
+			sc.nextLine();
 			switch (eleccionAgendas) {
 			case 0:
 				for (int i = 0; i < userLog.getAgendasUsuario().size(); i++) {
@@ -149,6 +159,7 @@ public class InterfazUsuario {
 			case 1:
 				System.out.println("Introduce el nombre de la agenda: ");
 				nAgenda = sc.next();
+				sc.nextLine();
 				if (userLog.buscarAgendaPorNombre(nAgenda) != null) {
 					System.out.println("Agenda ya existente");
 				} else
@@ -161,6 +172,7 @@ public class InterfazUsuario {
 				}
 				System.out.println("Nombre de la agenda a editar: ");
 				nAgenda = sc.next();
+				sc.nextLine();
 				agendaEnc = userLog.buscarAgendaPorNombre(nAgenda);
 				if (agendaEnc == null) {
 					System.out.println("Agenda no encontrada");
@@ -196,11 +208,13 @@ public class InterfazUsuario {
 			System.out.println("[3] - Editar categorias - Categorias actuales: " + agendaEnc.mostrarCategorias());
 			System.out.println("[4] - Salir del editor");
 			eleccionEditorAgenda = sc.nextInt();
+			sc.nextLine();
 			switch (eleccionEditorAgenda) {
 			case 0:
 				String nombreAgenda;
 				System.out.println("Nuevo nombre: ");
 				nombreAgenda = sc.next();
+				sc.nextLine();
 				agendaEnc.setNombre(nombreAgenda);
 				break;
 			case 1:
@@ -211,6 +225,7 @@ public class InterfazUsuario {
 				Usuario nuevoContacto;
 				System.out.println("Escribe el correo del contacto que quieres agregar: ");
 				correoContacto = sc.next();
+				sc.nextLine();
 				nuevoContacto = bd.buscarUsuarioPorCorreo(correoContacto);
 				if (nuevoContacto != null) {
 					agendaEnc.getContactos().add(nuevoContacto);
@@ -232,17 +247,20 @@ public class InterfazUsuario {
 			System.out.println("[1] - Borrar categoria");
 			System.out.println("[2] - Salir de editor de categorias");
 			eleccionCategoria = sc.nextInt();
+			sc.nextLine();
 			switch (eleccionCategoria) {
 			case 0:
 				String nCategoria;
 				System.out.println("Nombre de la nueva categoria: ");
 				nCategoria = sc.next();
+				sc.nextLine();
 				agendaEnc.getCategoria().add(nCategoria);
 				break;
 			case 1:
 				String bCategoria;
 				System.out.println("Nombre de categoria a eliminar: ");
 				bCategoria = sc.next();
+				sc.nextLine();
 				if (agendaEnc.borrarCategoria(bCategoria)) {
 					System.out.println("Categoria [" + bCategoria + "] eliminada exitosamente.");
 				} else
@@ -270,6 +288,7 @@ public class InterfazUsuario {
 				Conversacion nuevaConversacion;
 				System.out.println("Escribe el correo del contacto con el que quieres conversar: ");
 				correoReceptor = sc.next();
+				sc.nextLine();
 				contactoRec = bd.buscarUsuarioPorCorreo(correoReceptor);
 				if (contactoRec != null) {
 					nuevaConversacion = new Conversacion(bd.getNumeroConversaciones(), userLog, contactoRec);
@@ -307,6 +326,7 @@ public class InterfazUsuario {
 					userLog.mostrarConversaciones();
 					System.out.println("Id de conversacion a entrar: ");
 					entrarId = sc.nextInt();
+					sc.nextLine();
 					conversacionEnc = bd.encontrarConversacion(entrarId);
 					if (conversacionEnc != null) {
 						if (userLog.entrarConversacion(bd.getConversaciones().get(entrarId))) {
@@ -329,6 +349,7 @@ public class InterfazUsuario {
 			System.out.println("[3] - Borrar mensaje");
 			System.out.println("[0] - Salir de conversacion");
 			eleccionConvEnc = sc.nextInt();
+			sc.nextLine();
 			switch (eleccionConvEnc) {
 			case 1:
 				if (!conversacionEnc.getListaMensajes().isEmpty()) {
@@ -339,7 +360,7 @@ public class InterfazUsuario {
 			case 2:
 				String msg;
 				System.out.println("Mensaje: ");
-				msg = sc.next();
+				msg = sc.nextLine();
 				conversacionEnc.anyadirMensaje(msg, userLog);
 				break;
 			case 3:
@@ -348,6 +369,7 @@ public class InterfazUsuario {
 					conversacionEnc.mostrarMensajes();
 					System.out.println("numero de mensaje a eliminar: ");
 					elimMsg = sc.nextInt();
+					sc.nextLine();
 					conversacionEnc.getListaMensajes().remove(elimMsg);
 					System.out.println("Mensaje " + elimMsg + " eliminado");
 				} else System.out.println("No hay mensajes en esta conversacion");
