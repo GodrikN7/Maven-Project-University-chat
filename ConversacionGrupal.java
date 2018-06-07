@@ -14,7 +14,7 @@ package es.upm.fis2018.gm11_6.core;
 
 
 
-public class  ConversacionGrupal extends Conversacion {
+public class  ConversacionGrupal {
 	private String idConversacionGrupo;
 	
 	public void mostrarMensajesGrupo() {
