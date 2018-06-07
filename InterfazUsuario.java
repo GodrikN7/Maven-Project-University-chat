@@ -116,7 +116,7 @@ public class InterfazUsuario {
 			System.out.println("---------- Menu Usuario [" + userLog.getAlias() + "] ----------");
 			System.out.println("[0] - Menu agendas");
 			System.out.println("[1] - Menu conversacion");
-			System.out.println("[2] - Listar usuarios");
+			System.out.println("[2] - Editar perfil - WIP");
 			System.out.println("[3] - DESCONECTARSE");
 			eleccion2 = sc.nextInt();
 			sc.nextLine();
@@ -277,7 +277,7 @@ public class InterfazUsuario {
 			System.out.println("---- Menu Conversacion: [" + userLog.getAlias() + "] ----");
 			System.out.println("[0] - Empezar conversacion");
 			System.out.println("[1] - Ver conversaciones iniciadas");
-			System.out.println("[2] - Borrar conversacion -- WIP");
+			System.out.println("[2] - Borrar conversacion");
 			System.out.println("[3] - Entrar en conversacion");
 			System.out.println("[4] - Salir de menu conversacion");
 			eleccionMenuConversacion = sc.nextInt();

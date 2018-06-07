@@ -119,7 +119,7 @@ public class BaseDatos {
 		for (int i = 0; i < this.conversaciones.size(); i++) {
 			if (conversacionEnc.equals(this.conversaciones.get(i))) {
 				this.conversaciones.remove(i);
-				for (int j = 0; j < userConv.getConversacionesPart().size(); i++) {
+				for (int j = 0; j < userConv.getConversacionesPart().size(); j++) {
 					if (userConv.getConversacionesPart().get(j).equals(conversacionEnc)) {
 						userConv.getConversacionesPart().remove(j);
 						for (int x = 0; x < userConv2.getConversacionesPart().size(); x++) {
