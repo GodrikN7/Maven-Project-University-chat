@@ -10,12 +10,11 @@ package es.upm.fis2018.gm11_6.core;
 //  @ Author :
 //
 //
-
-
-
-
-public class  ConversacionGrupal extends Conversacion {
+public class  ConversacionGrupal {
 	private String idConversacionGrupo;
+	public ConversacionGrupal(){
+
+	}
 	
 	public void mostrarMensajesGrupo() {
 	
