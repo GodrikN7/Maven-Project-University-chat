@@ -10,6 +10,13 @@ package es.upm.fis2018.gm11_6.core;
 //  @ Author :
 //
 //
+<<<<<<< HEAD
+=======
+
+
+
+
+>>>>>>> b28060d4238f462206ddf0aa32339f9f3a4f4d3d
 public class  ConversacionGrupal {
 	private String idConversacionGrupo;
 	public ConversacionGrupal(){
